@@ -1,0 +1,8 @@
+.containerLetter {
+  display: flex;
+  flex-direction: column;
+}
+
+.saveBtn {
+  width: 30%;
+}
