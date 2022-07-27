@@ -6,8 +6,7 @@ class Form extends Component {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo,
       // hasTrunfo,
-      isSaveButtonDisabled,
-      // onSaveButtonClick,
+      isSaveButtonDisabled, onSaveButtonClick,
       onInputChange } = this.props;
     return (
       <section>
@@ -19,6 +18,7 @@ class Form extends Component {
             <input
               type="text"
               name="cardName"
+              className="name-input"
               id="name"
               data-testid="name-input"
               value={ cardName }
@@ -115,10 +115,10 @@ class Form extends Component {
 
           <button
             className="saveBtn"
-            type="button"
+            type="submit"
             data-testid="save-button"
             disabled={ isSaveButtonDisabled }
-            // onClick={ onSaveButtonClick }
+            onClick={ onSaveButtonClick }
           >
             Salvar
 
@@ -132,15 +132,15 @@ class Form extends Component {
 Form.propTypes = {
   cardName: PropTypes.string.isRequired,
   cardDescription: PropTypes.string.isRequired,
-  cardAttr1: PropTypes.string.isRequired,
-  cardAttr2: PropTypes.string.isRequired,
-  cardAttr3: PropTypes.string.isRequired,
+  cardAttr1: PropTypes.number.isRequired,
+  cardAttr2: PropTypes.number.isRequired,
+  cardAttr3: PropTypes.number.isRequired,
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
   // hasTrunfo: PropTypes.bool.isRequired,
   isSaveButtonDisabled: PropTypes.bool.isRequired,
-  // onSaveButtonClick: PropTypes.func.isRequired,
+  onSaveButtonClick: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired,
 };
 

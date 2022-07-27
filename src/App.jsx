@@ -15,7 +15,7 @@ class App extends React.Component {
     cardTrunfo: false,
     // hasTrunfo: false,
     isSaveButtonDisabled: true,
-    // onSaveButtonClick: '',
+    cardsSaved: [],
   }
 
   onInputChange = ({ target }) => {
@@ -32,19 +32,15 @@ class App extends React.Component {
 
       const canNotBeEmpty = cardName.length > 0 && cardDescription.length > 0
       && cardImage.length > 0 && cardRare.length > 0; // True
-      console.log(canNotBeEmpty);
 
       const sum = Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3);
-      const sumAttr = sum <= totalSumAttr;
-      console.log(sumAttr, sum); // True
+      const sumAttr = sum <= totalSumAttr; // True
 
       const maxSizeAttr = Number(cardAttr1) <= maxCharacterAttr && Number(cardAttr2)
       <= maxCharacterAttr && Number(cardAttr3) <= maxCharacterAttr; // True
-      console.log(maxSizeAttr);
 
       const attrNegative = Number(cardAttr1) >= 0 && Number(cardAttr2) >= 0
       && Number(cardAttr3) >= 0; // True
-      console.log(attrNegative);
 
       if (canNotBeEmpty && sumAttr && maxSizeAttr && attrNegative) {
         this.setState({
@@ -58,6 +54,25 @@ class App extends React.Component {
     });
   }
 
+  onSaveButtonClick = (event) => {
+    event.preventDefault();
+    const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
+      cardImage, cardRare, cardTrunfo, cardsSaved } = this.state;
+
+    cardsSaved.push(cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
+      cardImage, cardRare, cardTrunfo);
+
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardImage: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardRare: 'normal',
+    });
+  }
+
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo, isSaveButtonDisabled } = this.state;
@@ -65,6 +80,7 @@ class App extends React.Component {
       <main>
         <Form
           onInputChange={ this.onInputChange }
+          onSaveButtonClick={ this.onSaveButtonClick }
           cardName={ cardName }
           cardDescription={ cardDescription }
           cardAttr1={ cardAttr1 }
