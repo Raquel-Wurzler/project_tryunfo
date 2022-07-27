@@ -6,8 +6,8 @@ class CardList extends Component {
   render() {
     const { cardsSaved, btnDeleteCard } = this.props;
 
-    const savedingListCards = cardsSaved.map((card) => (
-      <div key={ card.cardName }>
+    const savedingListCards = cardsSaved.map((card, index) => (
+      <div key={ index }>
         <Card
           cardName={ card.cardName }
           cardDescription={ card.cardDescription }
