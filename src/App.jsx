@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import CardList from './components/CardList';
 import './App.css';
 
 class App extends React.Component {
@@ -13,7 +14,7 @@ class App extends React.Component {
     cardImage: '',
     cardRare: '',
     cardTrunfo: false,
-    // hasTrunfo: false,
+    hasTrunfo: false,
     isSaveButtonDisabled: true,
     cardsSaved: [],
   }
@@ -57,10 +58,21 @@ class App extends React.Component {
   onSaveButtonClick = (event) => {
     event.preventDefault();
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo, cardsSaved } = this.state;
+      cardImage, cardRare, cardTrunfo, cardsSaved, hasTrunfo } = this.state;
 
-    cardsSaved.push(cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo);
+    cardsSaved.push({
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    });
+
+    let stateHasTrunfo = false;
+    if (hasTrunfo === true || cardTrunfo === true) stateHasTrunfo = true;
 
     this.setState({
       cardName: '',
@@ -70,12 +82,14 @@ class App extends React.Component {
       cardAttr2: 0,
       cardAttr3: 0,
       cardRare: 'normal',
+      hasTrunfo: stateHasTrunfo,
     });
   }
 
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo, isSaveButtonDisabled } = this.state;
+      cardImage, cardRare, cardTrunfo, isSaveButtonDisabled, hasTrunfo,
+      cardsSaved } = this.state;
     return (
       <main>
         <Form
@@ -90,6 +104,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
+          hasTrunfo={ hasTrunfo }
         />
         <Card
           onInputChange={ this.onInputChange }
@@ -102,6 +117,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        <CardList cardsSaved={ cardsSaved } />
       </main>
     );
   }
