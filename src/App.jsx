@@ -86,6 +86,17 @@ class App extends React.Component {
     });
   }
 
+  btnDeleteCard = (name) => {
+    const { cardsSaved, hasTrunfo } = this.state;
+    const newCardsSaved = cardsSaved.filter((card) => card.cardName !== name);
+    if (hasTrunfo === true) {
+      this.setState({
+        cardsSaved: newCardsSaved,
+        hasTrunfo: false,
+      });
+    }
+  }
+
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo, isSaveButtonDisabled, hasTrunfo,
@@ -117,7 +128,10 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        <CardList cardsSaved={ cardsSaved } />
+        <CardList
+          cardsSaved={ cardsSaved }
+          btnDeleteCard={ this.btnDeleteCard }
+        />
       </main>
     );
   }
