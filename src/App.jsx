@@ -17,6 +17,7 @@ class App extends React.Component {
     hasTrunfo: false,
     isSaveButtonDisabled: true,
     cardsSaved: [],
+    // filterName: '',
   }
 
   onInputChange = ({ target }) => {
@@ -98,10 +99,28 @@ class App extends React.Component {
     }
   }
 
+  // setFilterName = (event) => {
+  //   this.setState({
+  //     filterName: event.target.value,
+  //   });
+  // }
+
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo, isSaveButtonDisabled, hasTrunfo,
-      cardsSaved } = this.state;
+      cardsSaved,
+      // filterName
+    } = this.state;
+
+    // const filteredCardName = cardsSaved.filter((cardItem) => {
+    //   const cardItemFilter = cardItem.cardName;
+    //   return cardItemFilter.includes(filterName);
+    // });
+
+    // const listfilteredCardName = filteredCardName.map((cardItem) => {
+    //   const liFilterName = <li key={ cardItem }>{cardItem}</li>;
+    //   return liFilterName;
+    // });
 
     return (
       <main>

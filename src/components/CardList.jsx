@@ -30,6 +30,13 @@ class CardList extends Component {
     return (
       <section>
         <h2>Todas as Cartas:</h2>
+        <input
+          type="text"
+          name="filterName"
+          data-testid="name-filter"
+          id="filterName"
+          placeholder="Nome da Carta"
+        />
         { savedingListCards }
       </section>
     );
