@@ -16,11 +16,11 @@ class Form extends Component {
           id="superTrunfo"
           checked={ cardTrunfo }
           onChange={ onInputChange }
-          data-testid="trunfo-input"
+          data-testid="trunfo-card"
         />
       </label>);
 
-    const textSuperTrunfo = 'Você já tem um Super Trunfo em seu baralho';
+    const textSuperTrunfo = <p>Você já tem um Super Trunfo em seu baralho</p>;
 
     return (
       <section>
@@ -115,9 +115,9 @@ class Form extends Component {
               <option value="muito raro">Muito Raro</option>
             </select>
           </label>
-          <div>
-            { !hasTrunfo ? superTrunfo : textSuperTrunfo }
-          </div>
+
+          { hasTrunfo ? textSuperTrunfo : superTrunfo }
+
           <button
             className="saveBtn"
             type="submit"

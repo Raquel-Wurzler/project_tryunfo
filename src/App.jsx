@@ -72,7 +72,7 @@ class App extends React.Component {
     });
 
     let stateHasTrunfo = false;
-    if (hasTrunfo === true || cardTrunfo === true) stateHasTrunfo = true;
+    if (hasTrunfo || cardTrunfo) stateHasTrunfo = true;
 
     this.setState({
       cardName: '',
