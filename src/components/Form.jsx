@@ -16,7 +16,7 @@ class Form extends Component {
           id="superTrunfo"
           checked={ cardTrunfo }
           onChange={ onInputChange }
-          data-testid="trunfo-card"
+          data-testid="trunfo-input"
         />
       </label>);
 
