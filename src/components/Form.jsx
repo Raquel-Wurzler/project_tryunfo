@@ -17,14 +17,15 @@ class Form extends Component {
           checked={ cardTrunfo }
           onChange={ onInputChange }
           data-testid="trunfo-input"
+          className="checkbox-super-trunfo"
         />
       </label>);
 
     const textSuperTrunfo = <p>Você já tem um Super Trunfo em seu baralho</p>;
 
     return (
-      <section>
-        <h1>Adicionar Nova Carta</h1>
+      <section className="form">
+        <h1 className="add-new-letter">Adicionar Nova Carta</h1>
 
         <form className="containerLetter">
           <label htmlFor="name">
@@ -32,7 +33,7 @@ class Form extends Component {
             <input
               type="text"
               name="cardName"
-              className="name-input"
+              className="name-input input"
               id="name"
               data-testid="name-input"
               value={ cardName }
@@ -45,16 +46,15 @@ class Form extends Component {
             <textarea
               name="cardDescription"
               id="descricao"
-              cols="30"
-              rows="10"
               data-testid="description-input"
               value={ cardDescription }
               onChange={ onInputChange }
+              className="input"
             />
           </label>
 
           <label htmlFor="first-attribute">
-            Primeiro Atributo da Carta:
+            Nível de fofura:
             <input
               type="number"
               name="cardAttr1"
@@ -62,11 +62,12 @@ class Form extends Component {
               data-testid="attr1-input"
               value={ cardAttr1 }
               onChange={ onInputChange }
+              className="input"
             />
           </label>
 
           <label htmlFor="second-attribute">
-            Segundo Atributo da Carta:
+            Nível de Coragem:
             <input
               type="number"
               name="cardAttr2"
@@ -74,11 +75,12 @@ class Form extends Component {
               data-testid="attr2-input"
               value={ cardAttr2 }
               onChange={ onInputChange }
+              className="input"
             />
           </label>
 
           <label htmlFor="third-attribute">
-            Terceiro Atributo da Carta:
+            Altura do Latido:
             <input
               type="number"
               name="cardAttr3"
@@ -86,6 +88,7 @@ class Form extends Component {
               data-testid="attr3-input"
               value={ cardAttr3 }
               onChange={ onInputChange }
+              className="input"
             />
           </label>
 
@@ -98,6 +101,7 @@ class Form extends Component {
               data-testid="image-input"
               value={ cardImage }
               onChange={ onInputChange }
+              className="input"
             />
           </label>
 
@@ -109,6 +113,7 @@ class Form extends Component {
               data-testid="rare-input"
               value={ cardRare }
               onChange={ onInputChange }
+              className="input"
             >
               <option value="normal">Normal</option>
               <option value="raro">Raro</option>
@@ -126,7 +131,6 @@ class Form extends Component {
             onClick={ onSaveButtonClick }
           >
             Salvar
-
           </button>
         </form>
       </section>

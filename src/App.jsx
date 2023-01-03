@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 import CardList from './components/CardList';
+import Header from './components/Header';
 import './App.css';
 
 class App extends React.Component {
@@ -17,7 +18,9 @@ class App extends React.Component {
     hasTrunfo: false,
     isSaveButtonDisabled: true,
     cardsSaved: [],
-    // filterName: '',
+    filtered: [],
+    notFiltered: false,
+    isDisabledInputs: false,
   }
 
   onInputChange = ({ target }) => {
@@ -88,56 +91,74 @@ class App extends React.Component {
     });
   }
 
-  btnDeleteCard = (name) => {
-    const { cardsSaved, hasTrunfo } = this.state;
-    const newCardsSaved = cardsSaved.filter((card) => card.cardName !== name);
-    if (hasTrunfo === true) {
+  btnDeleteCard = (index) => {
+    const { cardsSaved } = this.state;
+    const newCardsSaved = cardsSaved.filter((_card, i) => i !== index);
+    this.setState({ cardsSaved: newCardsSaved });
+    if (cardsSaved[index].cardTrunfo === true) {
+      console.log('test');
       this.setState({
-        cardsSaved: newCardsSaved,
         hasTrunfo: false,
       });
     }
   }
 
-  // setFilterName = (event) => {
-  //   this.setState({
-  //     filterName: event.target.value,
-  //   });
-  // }
+  filteringName = ({ target }) => {
+    const { value } = target;
+    const { cardsSaved } = this.state;
+    const nameFiltered = cardsSaved.filter((card) => card.cardName.includes(value));
+    const notFilter = value.length !== 0 && nameFiltered.length === 0;
+    this.setState({ filtered: nameFiltered, notFiltered: notFilter });
+  };
+
+  filteringRare = ({ target }) => {
+    const { value } = target;
+    const { cardsSaved } = this.state;
+    const rareFiltered = cardsSaved.filter((card) => card.cardRare.includes(value));
+    if (value === 'todas') {
+      this.setState({ filtered: cardsSaved });
+    }
+    if (value === 'normal') {
+      this.setState({ filtered: cardsSaved
+        .filter((card) => card.cardRare.includes('normal')) });
+    }
+    if (value === 'raro') {
+      this.setState({ filtered: cardsSaved
+        .filter((card) => card.cardRare.includes('raro')) });
+    }
+    if (value === 'muito raro') {
+      this.setState({ filtered: cardsSaved
+        .filter((card) => card.cardRare.includes('muito raro')) });
+    }
+    if (rareFiltered.length === 0 && value !== 'todas') {
+      this.setState({ filtered: [], notFiltered: true });
+    }
+  };
+
+  filteringTrunfo = ({ target }) => {
+    const { checked } = target;
+    const { cardsSaved } = this.state;
+    if (checked) {
+      this.setState({
+        filtered: cardsSaved.filter((card) => card.cardTrunfo === true),
+        isDisabledInputs: true });
+    }
+    if (!checked) {
+      this.setState({
+        filtered: cardsSaved, isDisabledInputs: false,
+      });
+    }
+  };
 
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
       cardImage, cardRare, cardTrunfo, isSaveButtonDisabled, hasTrunfo,
-      cardsSaved,
-      // filterName
+      cardsSaved, filterName, filtered, notFiltered, filterTrunfo, isDisabledInputs,
     } = this.state;
 
-    // const filteredCardName = cardsSaved.filter((cardItem) => {
-    //   const cardItemFilter = cardItem.cardName;
-    //   return cardItemFilter.includes(filterName);
-    // });
-
-    // const listfilteredCardName = filteredCardName.map((cardItem) => {
-    //   const liFilterName = <li key={ cardItem }>{cardItem}</li>;
-    //   return liFilterName;
-    // });
-
-    return (
-      <main>
-        <Form
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          hasTrunfo={ hasTrunfo }
-        />
+    const renderCard = (
+      <div className="card-box">
+        <h1 className="preview-letter">Preview da Carta</h1>
         <Card
           onInputChange={ this.onInputChange }
           cardName={ cardName }
@@ -148,11 +169,45 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+          filterName={ filterName }
         />
-        <CardList
-          cardsSaved={ cardsSaved }
-          btnDeleteCard={ this.btnDeleteCard }
-        />
+      </div>
+    );
+
+    return (
+      <main>
+        <Header />
+        <div className="upside">
+          <Form
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+            hasTrunfo={ hasTrunfo }
+          />
+          { cardName === '' ? null : renderCard}
+        </div>
+        <div className="bottom">
+          <CardList
+            cardsSaved={ cardsSaved }
+            filtered={ filtered }
+            notFiltered={ notFiltered }
+            btnDeleteCard={ this.btnDeleteCard }
+            filteringName={ this.filteringName }
+            cardRare={ cardRare }
+            filteringRare={ this.filteringRare }
+            filteringTrunfo={ this.filteringTrunfo }
+            filterTrunfo={ filterTrunfo }
+            isDisabledInputs={ isDisabledInputs }
+          />
+        </div>
       </main>
     );
   }

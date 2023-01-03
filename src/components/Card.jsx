@@ -7,23 +7,49 @@ class Card extends Component {
       cardAttr2, cardAttr3, cardImage, cardRare, cardTrunfo } = this.props;
 
     const superTrunfoElement = (cardTrunfo === true
-      ? <p data-testid="trunfo-card">Super Trunfo</p> : '');
+      ? (
+        <img
+          src="./Tryunfo.png"
+          alt="logo-tryunfo"
+          data-testid="trunfo-input"
+          className="img-tryunfo"
+        />
+      ) : '');
 
     return (
-      <section>
-        <p data-testid="name-card">{cardName}</p>
+      <div className="card">
+        <div className="card-itens">
+          <p className="name-info">Nome:</p>
+          <p data-testid="name-card">{cardName}</p>
+        </div>
         <img
           src={ cardImage }
           alt={ cardName }
           data-testid="image-card"
+          className="img-card"
         />
-        <p data-testid="description-card">{cardDescription}</p>
-        <p data-testid="attr1-card">{cardAttr1}</p>
-        <p data-testid="attr2-card">{cardAttr2}</p>
-        <p data-testid="attr3-card">{cardAttr3}</p>
-        <p data-testid="rare-card">{cardRare}</p>
+        <div className="card-description">
+          <p className="name-info">Descrição:</p>
+          <p data-testid="description-card">{cardDescription}</p>
+        </div>
+        <div className="card-itens">
+          <p className="name-info">Nível de fofura:</p>
+          <p data-testid="attr1-card">{cardAttr1}</p>
+        </div>
+        <div className="card-itens">
+          <p className="name-info">Nível de Coragem:</p>
+          <p data-testid="attr2-card">{cardAttr2}</p>
+        </div>
+        <div className="card-itens">
+          <p className="name-info">Altura do Latido:</p>
+          <p data-testid="attr3-card">{cardAttr3}</p>
+        </div>
+        <div className="card-itens">
+          <p className="name-info">Raridade:</p>
+          <p data-testid="rare-card">{cardRare}</p>
+        </div>
         {superTrunfoElement}
-      </section>
+      </div>
     );
   }
 }
