@@ -7,7 +7,7 @@ _"A Trybe é uma escola do futuro para qualquer pessoa que queira melhorar de vi
 #### Projeto de conclusão da seção 3, no módulo de Front-end
 
 ### Principal objetivo:
-* Uma aplicação react para criar, pesquisar e excluir cartas do jogo Tryunfo (parecido com Trunfo).
+* Uma aplicação react para criar, pesquisar e excluir cartas do jogo Tryunfo (parecido com o jogo Super Trunfo).
 
 ### O que foi entregue:
 <details>
@@ -31,6 +31,8 @@ _"A Trybe é uma escola do futuro para qualquer pessoa que queira melhorar de vi
 * Todo componentizado em arquivos jsx;
 * Contém as seguintes componentes: Card (com os dados de cada carta), CardList (com as regras de negócio para renderizar a lista de cartas criadas), Form (formulário para cadastrar as informações de cada nova carta), Header (cabeçalho);
 * Nessa aplicação é possível cadastrar uma nova carta com nome, descrição, habilidades de fofura, coragem e latido, imagem e raridade. Após salvar cada carta ela é renderizada abaixo. É possível filtrar as cartas criadas por nome, raridade e a carta Super Trunfo;
+* Enquanto as informações das cartas são digitadas no formulário é possível ver um preview de como será a carta;
+* Apenas uma carta da lista pode ser uma carta Super Trunfo;
 * Usado o framework Bulma para auxiliar na estilização;
 
 
